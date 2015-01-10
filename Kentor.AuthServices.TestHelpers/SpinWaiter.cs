@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Kentor.AuthServices.TestHelpers
 {
     public static class SpinWaiter
     {
+        [DebuggerDisplay("TestResult: {result}, {errorMessage}")]
         private class TestResult
         {
             public readonly bool result;
@@ -19,7 +21,7 @@ namespace Kentor.AuthServices.TestHelpers
                 this.errorMessage = errorMessage;
             }
         }
-        public readonly static TimeSpan MaxWait = new TimeSpan(0, 0, 0, 0, 500);
+        public readonly static TimeSpan MaxWait = new TimeSpan(0, 0, 0, 2);
         public static void While(Func<bool> condition, string failMessage = "Timeout passed without condition becoming false.")
         {
             While(() => new TestResult(condition(), failMessage));
