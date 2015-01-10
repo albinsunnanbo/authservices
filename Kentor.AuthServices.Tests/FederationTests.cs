@@ -125,6 +125,7 @@ namespace Kentor.AuthServices.Tests
                 StubFactory.CreateOptions());
 
             var initialValidUntil = subject.MetadataValidUntil;
+            initialValidUntil.Should().NotBe(DateTime.MinValue, "initialValidUntil = {0} indicates that metadata was not loaded correctly.", initialValidUntil);
 
             SpinWaiter.WhileEqual(() => subject.MetadataValidUntil, () => initialValidUntil);
         }
@@ -151,6 +152,7 @@ namespace Kentor.AuthServices.Tests
 
             MetadataServer.FederationVeryShortCacheDurationSecondAlternativeEnabled = true;
             var initialValidUntil = subject.MetadataValidUntil;
+            initialValidUntil.Should().NotBe(DateTime.MinValue, "initialValidUntil = {0} indicates that metadata was not loaded correctly.", initialValidUntil);
             SpinWaiter.WhileEqual(() => subject.MetadataValidUntil, () => initialValidUntil);
 
             options.IdentityProviders.TryGetValue(new EntityId("http://idp1.federation.example.com/metadata"), out idp)
@@ -227,6 +229,7 @@ namespace Kentor.AuthServices.Tests
                 .Should().BeTrue("idp should be loaded initially");
 
             var initialValidUntil = subject.MetadataValidUntil;
+            initialValidUntil.Should().NotBe(DateTime.MinValue, "initialValidUntil = {0} indicates that metadata was not loaded correctly.", initialValidUntil);
 
             MetadataServer.IdpAndFederationShortCacheDurationAvailable = false;
 

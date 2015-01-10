@@ -370,6 +370,7 @@ namespace Kentor.AuthServices.Tests
 
             var subject = CreateSubjectForMetadataRefresh();
             var initialValidUntil = subject.MetadataValidUntil;
+            initialValidUntil.Should().NotBe(DateTime.MinValue, "initialValidUntil = {0} indicates that metadata was not loaded correctly.", initialValidUntil);
 
             SpinWaiter.WhileEqual(() => subject.MetadataValidUntil, () => initialValidUntil);
         }
