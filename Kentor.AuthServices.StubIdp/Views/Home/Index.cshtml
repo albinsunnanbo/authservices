@@ -51,6 +51,21 @@
         @Html.EditorFor(m => m.NameId)
         @Html.ValidationMessageFor(m => m.NameId)
     </div>
+    <div>
+        @Html.LabelFor(m => m.Subject_SerialNumber)
+        @Html.EditorFor(m => m.Subject_SerialNumber)
+        @Html.ValidationMessageFor(m => m.Subject_SerialNumber)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Subject_GivenName)
+        @Html.EditorFor(m => m.Subject_GivenName)
+        @Html.ValidationMessageFor(m => m.Subject_GivenName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Subject_Surname)
+        @Html.EditorFor(m => m.Subject_Surname)
+        @Html.ValidationMessageFor(m => m.Subject_Surname)
+    </div>
 
     <button>Submit</button>
 }
@@ -59,7 +74,7 @@
 <script>
     // Focus first relevant field to use
     if ($("#InResponseTo").val()) {
-        $("#NameId").focus().select();
+        $("#Subject_SerialNumber").focus().select();
     } else {
         $("#AssertionConsumerServiceUrl").focus().select();
     }
