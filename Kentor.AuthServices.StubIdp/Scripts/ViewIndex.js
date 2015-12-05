@@ -3,7 +3,7 @@
 
     var resetUnobtrusive = function (form) {
         if (form && form.length) {
-            form.off("submit"); // remove previous click event
+            form.off("submitBtn"); // remove previous click event
 
             form.removeData('validator');
             form.removeData('unobtrusiveValidation');
@@ -108,7 +108,7 @@
         if (selectedUserId && $("#userList").find("option[value=" + selectedUserId + "]").length > 0) {
             $("#userList").val(selectedUserId);
             $("#userList").change();
-            $("#submit").focus();
+            $("#submitBtn").focus();
         }
     };
 
@@ -135,13 +135,21 @@
             if (postBindingForm.length == 0) {
                 postBindingPage.each(function (idx, elem) {
                     if ($(elem).is("form")) {
-                        postBindingForm = elem;
+                        postBindingForm = $(elem);
                     }
                 });
             }
-            placeholder.empty().append(postBindingForm);
-            var form = placeholder.find("form");
-            form[0].submit();
+            if (postBindingForm.find("input").length == 1 && postBindingForm.find("input")[0].name == "SAMLResponse") {
+                // We got the post binding form, paste it in the placeholder and submit
+                placeholder.empty().append(postBindingForm);
+                var placeholderForm = placeholder.find("form");
+                placeholderForm[0].submit();
+            }
+            else {
+                // Oops, we didn't get the post binding form, retry submitting the form the normal way
+                // Typically server side validation error, the best thing is to reload the page the normal way
+                form[0].submit();
+            }
         });
     });
 });

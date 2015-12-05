@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +114,12 @@
   <ItemGroup>
     <Content Include="Content\Kentor.png" />
     <Content Include="Content\normalize.css" />
+    <Content Include="Content\ProgressButtonStyles\css\component.css" />
+    <Content Include="Content\ProgressButtonStyles\css\demo.css" />
+    <Content Include="Content\ProgressButtonStyles\css\normalize.css" />
+    <Content Include="Content\ProgressButtonStyles\fonts\codropsicons\codropsicons.svg" />
+    <Content Include="Content\ProgressButtonStyles\fonts\codropsicons\license.txt" />
+    <Content Include="Content\ProgressButtonStyles\fonts\icomoon\icomoon.svg" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -130,6 +137,13 @@
     <Content Include="App_Data\default.json" />
     <Content Include="Scripts\ICanHaz.js" />
     <Content Include="Scripts\ICanHaz.min.js" />
+    <Content Include="Content\ProgressButtonStyles\fonts\codropsicons\codropsicons.eot" />
+    <Content Include="Content\ProgressButtonStyles\fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="Content\ProgressButtonStyles\fonts\codropsicons\codropsicons.woff" />
+    <Content Include="Content\ProgressButtonStyles\fonts\icomoon\icomoon.eot" />
+    <Content Include="Content\ProgressButtonStyles\fonts\icomoon\icomoon.ttf" />
+    <Content Include="Content\ProgressButtonStyles\fonts\icomoon\icomoon.woff" />
+    <Content Include="Content\ProgressButtonStyles\README.md" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
@@ -139,8 +153,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ProgressButtonStyles\README.md" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\js.cookie.js" />
+    <Content Include="Scripts\ProgressButtonStyles\js\classie.js" />
+    <Content Include="Scripts\ProgressButtonStyles\js\modernizr.custom.js" />
+    <Content Include="Scripts\ProgressButtonStyles\js\progressButton.js" />
     <Content Include="Scripts\ViewIndex.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />

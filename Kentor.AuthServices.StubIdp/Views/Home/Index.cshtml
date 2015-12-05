@@ -71,11 +71,43 @@ else
         <button id="add-attribute">Add attribute</button>
     </fieldset>
     <p></p>
-    <button id="submit">Log in</button>
+    <button type="submit" id="submitBtn" class="progress-button" data-style="shrink" data-horizontal>Log in</button>
 }
 
 <div id="post-binding-form-placeholder" style="display:none"></div>
 
+<link href="~/Content/ProgressButtonStyles/css/component.css" rel="stylesheet" />
+<script src="~/Scripts/ProgressButtonStyles/js/classie.js"></script>
+<script src="~/Scripts/ProgressButtonStyles/js/modernizr.custom.js"></script>
+<script src="~/Scripts/ProgressButtonStyles/js/progressButton.js"></script>
+<script>
+    [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
+        new ProgressButton(bttn, {
+            callback: function (instance) {
+                var form = $(instance.button).closest("form");
+                if (form.length > 0) {
+                    if (form.valid()) {
+                        form.submit();
+                    }
+                    else {
+                        instance._stop(-1);
+                        return; // abort
+                    }
+                }
+                var progress = 0,
+                    interval = setInterval(function () {
+                        progress = progress + Math.random() * 0.5;
+                        instance._setProgress(1 - (1 / (progress + 1)));
+
+                        if (progress >= 50) {
+                            instance._stop(-1);
+                            clearInterval(interval);
+                        }
+                    }, 200);
+            }
+        });
+    });
+</script>
 
 <script id="attributeRowTemplate" type="text/html">
     @* Mustache.js template for each attribute row *@
