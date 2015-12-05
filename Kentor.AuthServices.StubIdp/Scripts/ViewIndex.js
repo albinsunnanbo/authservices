@@ -112,9 +112,36 @@
         }
     };
 
-    $("body").on("submit", "form", function () {
+    $("body").on("submit", "form", function (e) {
+        var placeholder = $("#post-binding-form-placeholder");
+        if (!placeholder || placeholder.length == 0) {
+            // Not the IDP page, could be discovery service
+            return;
+        }
         // Remember the selected user in a cookie
         var selectedUserId = $("#userList").val();
         Cookies.set(cookieName, selectedUserId, { expires: 365, path: '' }); // path: '' ensures that a separate cookie is created for each named sub-IDP
+
+        // Get the post binding page by an ajax post call
+        // If we don't have JavaScript enabled in the browser the normal form post will still transfer to the post-binding-page.
+        e.preventDefault(); // block normal form submit and instead make an ajax call, 
+        var form = $(this);
+        var submitUrl = form.attr("action");
+        $.post(submitUrl, form.serialize()).success(function (data, status, jqXHR) {
+            // This is a bit hacky, we get the post binding page, cut'n paste the form into our own page into a placeholder element and submit the form from here
+            // That way we don't end up on the post binding page waiting for the SP
+            var postBindingPage = $(data);
+            var postBindingForm = postBindingPage.find("form");
+            if (postBindingForm.length == 0) {
+                postBindingPage.each(function (idx, elem) {
+                    if ($(elem).is("form")) {
+                        postBindingForm = elem;
+                    }
+                });
+            }
+            placeholder.empty().append(postBindingForm);
+            var form = placeholder.find("form");
+            form[0].submit();
+        });
     });
 });
