@@ -22,7 +22,18 @@
     Actual behaviour
 </h3>
 <p>
-    Message: System.InvalidOperationException: Sequence contains more than one element
+    Exception: System.InvalidOperationException: Sequence contains more than one element
+    <pre>
+[InvalidOperationException: Sequence contains more than one element]
+   System.Linq.Enumerable.Single(IEnumerable`1 source) +396
+   Kentor.AuthServices.WebSso.<>c.<InitBasicFields>b__6_1(KeyValuePair`2 kv) in C:\Git\authservices\Kentor.AuthServices\WebSso\HttpRequestData.cs:136
+   System.Linq.Enumerable.ToDictionary(IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector, IEqualityComparer`1 comparer) +236
+   System.Linq.Enumerable.ToDictionary(IEnumerable`1 source, Func`2 keySelector, Func`2 elementSelector) +57
+   Kentor.AuthServices.WebSso.HttpRequestData.InitBasicFields(String httpMethod, Uri url, String applicationPath, IEnumerable`1 formData) in C:\Git\authservices\Kentor.AuthServices\WebSso\HttpRequestData.cs:134
+   Kentor.AuthServices.WebSso.HttpRequestData.Init(String httpMethod, Uri url, String applicationPath, IEnumerable`1 formData, IEnumerable`1 cookies, Func`2 cookieDecryptor, ClaimsPrincipal user) in C:\Git\authservices\Kentor.AuthServices\WebSso\HttpRequestData.cs:96
+   Kentor.AuthServices.WebSso.HttpRequestData..ctor(String httpMethod, Uri url, String applicationPath, IEnumerable`1 formData, IEnumerable`1 cookies, Func`2 cookieDecryptor, ClaimsPrincipal user) in C:\Git\authservices\Kentor.AuthServices\WebSso\HttpRequestData.cs:66
+   Kentor.AuthServices.Owin.<ToHttpRequestData>d__0.MoveNext() in C:\Git\authservices\Kentor.AuthServices.Owin\OwinContextExtensions.cs:38
+</pre>
     <br />
     in HttpRequestData.InitBasicFields
 </p>
@@ -36,4 +47,6 @@
     <p>
         <input type="submit" value="Post form" />
     </p>
+    <input type="hidden" name="kaboom" value="whatever" />
+    <input type="hidden" name="kaboom" value="something else" />
 }
