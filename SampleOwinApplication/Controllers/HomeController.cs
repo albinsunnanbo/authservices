@@ -20,5 +20,11 @@ namespace SampleOwinApplication.Controllers
             var identity = System.Web.HttpContext.Current.User.Identity as ClaimsIdentity;
             return View(identity.Claims);
         }
+
+        [Authorize]
+        public ActionResult SecureForm()
+        {
+            return View();
+        }
     }
 }

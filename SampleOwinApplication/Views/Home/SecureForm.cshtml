@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Secure form";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Test page to reproduce posting form data when logged out for an active middleware.</p>
+<h3>
+    To reproduce
+</h3>
+<ol>
+    <li>Log out in a separate browser tab</li>
+    <li>Click the Post form button below</li>
+</ol>
+<h3>
+    Expected behaviour
+</h3>
+<p>
+    Browser is redirected to the login page
+</p>
+<h3>
+    Actual behaviour
+</h3>
+<p>
+    Message: System.InvalidOperationException: Sequence contains more than one element
+    <br />
+    in HttpRequestData.InitBasicFields
+</p>
+<h3>
+    Test form
+</h3>
+@using (var form = Html.BeginForm())
+{
+    <p>HttpMethod:&nbsp; @Request.HttpMethod</p>
+    <p>Current time: @DateTime.Now</p>
+    <p>
+        <input type="submit" value="Post form" />
+    </p>
+}
